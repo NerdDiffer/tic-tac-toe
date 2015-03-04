@@ -1,61 +1,6 @@
-require_relative '../lib//tic-tac-toe.rb'
+require 'spec_helper'
 
 module TicTacToe
-
-  describe Game do
-    before :all do
-      @game = Game.new("Abby", "Bob")
-    end
-  
-    describe "#new" do
-      it 'creates an instance of Game class' do
-        expect(@game).to be_an_instance_of(Game)
-      end
-    end
-
-    describe "#randomly_assign_turns" do
-      game2 = Game.new("Zulu", "Yellow")
-      game2.randomly_assign_turns
-      it 'will automatically return the player picked as @current_player' do
-        expect(game2.randomly_assign_turns).to eq(game2.current_player)
-      end
-      context 'randomly picks one player to be the role of @current_player,' do
-        it 'while selecting the remaining player to be role of @other_player' do
-          expect(game2.current_player).not_to eq(game2.other_player)
-        end
-      end
-    end
-  end
-  
-  describe Player do
-    before :all do
-      @p1 = Player.new("Alf", "X")
-      @p2 = Player.new("Bruce", "O")
-    end
-  
-    context 'name' do
-      it 'returns the name of the player' do
-        expect(@p1.name).to eq 'Alf'
-        expect(@p2.name).to eq 'Bruce'
-      end
-    end
-  
-    context 'mark' do
-      it 'returns the mark of the player' do
-        expect(@p1.mark).to eq 'X'
-        expect(@p2.mark).to eq 'O'
-      end
-    end
-
-    describe '#make_move' do
-      context "when selected square is not yet marked" do
-        it "can send the game board an ID, which updates the board" do
-          expect{ @p1.make_move(3) }.not_to raise_error
-        end
-      end
-    end
-  end
-  
   describe Board do
     before :all do
       @board = Board.new
@@ -150,40 +95,4 @@ module TicTacToe
     end
 
   end
-  
-  describe Square do
-    before :all do
-      @sq1 = Square.new(1, nil)
-    end
-  
-    context '#new' do
-      it 'is initialized with an id' do
-        expect(@sq1.id).to eq 1
-      end
-      it 'has a mark of nil' do
-        expect(@sq1.mark).to eq nil
-      end
-    end
-
-    describe '#change_mark' do
-      before :all do
-        @sq1 = Square.new(1, nil)
-      end
-      context "when it's not yet marked,"  do
-        it "before trying to mark, check square for nil value" do
-          expect(@sq1.mark).to be_nil
-        end
-        it "the square should be able to change its own mark" do
-          @sq1.change_mark('X')
-          expect(@sq1.mark).to eq 'X'
-        end
-      end
-      context "when it is already marked," do
-        it "the square won't change itself" do
-          expect{ @sq1.change_mark('X') }.to raise_error
-        end
-      end
-    end
-  end
-
 end
