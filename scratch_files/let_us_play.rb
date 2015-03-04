@@ -1,4 +1,4 @@
-require_relative './tic-tac-toe.rb'
+require_relative '../lib/tic-tac-toe.rb'
 
-game = TicTacToe::Game.new("Allison", "Beatriz")
+game = TicTacToe::Game.new("George", "Jerry")
 game.play

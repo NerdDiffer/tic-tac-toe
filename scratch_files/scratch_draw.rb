@@ -1,4 +1,4 @@
-require_relative './tic-tac-toe.rb'
+require_relative '../lib/tic-tac-toe.rb'
 
 board = TicTacToe::Board.new
 p1 = TicTacToe::Player.new("Ralph", "X")

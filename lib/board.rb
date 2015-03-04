@@ -48,7 +48,7 @@ module TicTacToe
       @marks_array[0]
     end
 
-    def has_someone_won?(move)
+    def has_someone_won?(move = nil)
       return false if move.nil?
 
       WINNING_COMBOS.any? do |combo|

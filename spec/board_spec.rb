@@ -22,18 +22,12 @@ module TicTacToe
     end
 
     describe '#receive_move' do
-      context 'accepted parameters:' do
-        it 'should be one hash object with the keys `id` and `mark`' do
-          
-        end
-      end
-
       context 'before applying the player move to the board,' do
         square_id = 1
         board = Board.new
         board.marks_array[square_id] = Square.new(square_id, nil)
 
-        it 'the mark should be nil' do
+        it "the square's mark should be nil" do
           expect(board.marks_array[square_id].mark).to be_nil
         end
       end
@@ -57,38 +51,34 @@ module TicTacToe
     end
 
     describe '#has_someone_won?' do
-      b = Board.new
       context 'before making any moves at all' do
-        xit 'it should return false' do
-          expect(b.has_someone_won?()).to eq false
+        it 'it should return false' do
+          @b = Board.new
+          expect(@b.has_someone_won?()).to eq false
         end
       end
 
-      context 'before making winning move' do
-        b1 = Board.new
-        p1 = Player.new("Alf", 'X')
-        sq1 = Square.new(1, 'X')  
-        sq2 = Square.new(2, 'X')  
-        b1.marks_array[1] = sq1
-        b1.marks_array[2] = sq2
-        p1_move_bad = p1.make_move(6)
-        b1.receive_move(p1_move_bad)
-        xit 'should return false because nobody has won' do
-          expect(b.has_someone_won?(p1_move_bad)).to eq false
+      context 'before making winning move,' do
+        it 'should return false because nobody has won' do
+          @b = Board.new
+          @p = Player.new("Alf", 'X')
+          p_move_bad = @p.make_move(6)
+          @b.receive_move(@p.make_move(1))
+          @b.receive_move(@p.make_move(2))
+          @b.receive_move(p_move_bad)
+          expect(@b.has_someone_won?(p_move_bad)).to eq false
         end
       end
 
-      context 'after making a winning move' do
-        b = Board.new
-        p = Player.new("Alf", 'X')
-        sq1 = Square.new(1, 'X')  
-        sq2 = Square.new(2, 'X')  
-        b.marks_array[1] = sq1
-        b.marks_array[2] = sq2
-        p_move_ftw = p.make_move(3)
-        b.receive_move(p_move_ftw)
+      context 'after making a winning move,' do
         it 'should return true when marks are all the same within a row' do
-          expect(b.has_someone_won?(p_move_ftw)).to eq true
+          @b = Board.new
+          @p = Player.new("Alf", 'X')
+          p_move_ftw = @p.make_move(3)
+          @b.receive_move(@p.make_move(1))
+          @b.receive_move(@p.make_move(2))
+          @b.receive_move(p_move_ftw)
+          expect(@b.has_someone_won?(p_move_ftw)).to eq true
         end
       end
 

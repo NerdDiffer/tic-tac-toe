@@ -7,10 +7,10 @@ module TicTacToe
       @mark = mark
     end
 
-    # send a message to board
+    # sends a message to the game's board object
     # @param square_id, the ID of the square you want to mark
     # returns an hash containing
-    #   passed-in ID of square to mark
+    #   the id of the square on which the player wants to make a move
     #   the mark of the player making the move
     def make_move(square_id)
       { square_id: square_id, player_mark: @mark }

@@ -6,6 +6,6 @@ task :default => :spec
 desc "run tests for this lab"
 
 RSpec::Core::RakeTask.new do |task|
-  task.rspec_opts = '-r ./rspec_config'
+  task.rspec_opts = '-r ./spec/spec_helper'
   task.verbose = false
 end

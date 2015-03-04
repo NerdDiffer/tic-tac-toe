@@ -24,5 +24,20 @@ module TicTacToe
         end
       end
     end
+
+    describe '#switch_players' do
+      before :each do 
+        @game = Game.new("Alessio", "Bruno")
+        @game.current_player = @game.player1
+        @game.other_player = @game.player2
+        @game.switch_players
+      end
+      it 'switches roles, current player becomes other player' do
+        expect(@game.other_player.name).to eq "Alessio"
+      end
+      it 'switches roles, other player becomes current player' do
+        expect(@game.current_player.name).to eq "Bruno"
+      end
+    end
   end
 end
