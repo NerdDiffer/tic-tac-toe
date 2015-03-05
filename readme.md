@@ -9,5 +9,5 @@ Build a tic-tac-toe game on command-line for 2 human players who can play agains
 `rake`
 
 ###how to play
-want to play against yourself?  
+want to play(against yourself)?  
 `ruby let_us_play.rb` from this project's home directory

@@ -30,6 +30,7 @@ module TicTacToe
 
       rows_for_display = row_positions.map(&row_for_display)
 
+      puts
       puts rows_for_display.join("\n" + row_separator + "\n")
     end
     

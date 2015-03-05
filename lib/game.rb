@@ -28,14 +28,14 @@ module TicTacToe
 
     def prompt_and_check_input
       begin
-        puts
         @board.print_board
+        puts
         puts "#{@current_player.name}: Make a move. Enter a number between 1 & 9."
         input = gets.chomp.to_i
         move = @current_player.make_move(input)
         @board.receive_move(move)
       rescue StandardError => e
-        puts e.message
+        print_error_message(e)
         retry
       else
         move
@@ -49,6 +49,23 @@ module TicTacToe
       puts "Shuffling players..."
       randomly_assign_turns
       puts "#{@current_player.name} goes first"
+    end
+
+    def print_error_message(e)
+      def grow_marker n
+        str = ''
+        n.times { str << '*' }
+        str
+      end
+      msg = (e.class.to_s << ": " << e.message.to_s)
+      n = msg.length
+      marker = grow_marker(n)
+      puts
+      print marker.center(n)
+      puts
+      print msg.center(n)
+      puts
+      print marker.center(n)
     end
 
     def print_move(move)
