@@ -1,6 +1,5 @@
 module TicTacToe
   class Square
-    #attr_accessor :id, :mark
     attr_reader :id, :mark
 
     def initialize(id, mark = nil)
@@ -13,7 +12,7 @@ module TicTacToe
     # @param mark, the ID of the square to mark
     def change_mark(mark)
       if !@mark.nil?
-        message = "Square ##{@id} is already marked. Choose another."
+        message = "Square ##{@id} with mark #{@mark}, is already marked. Choose another."
         raise RuntimeError.new(message)
       else
         @mark = mark

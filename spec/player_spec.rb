@@ -3,7 +3,7 @@ require 'spec_helper'
 module TicTacToe
 
   describe Player do
-    context 'querying player attributes,' do
+    describe 'Player attributes,' do
       before :all do
         @p1 = Player.new("Alf", "X")
         @p2 = Player.new("Bruce", "O")

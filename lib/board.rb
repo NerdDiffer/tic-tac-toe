@@ -9,6 +9,7 @@ module TicTacToe
 
     def initialize
       @marks_array = populate_new_board
+      @list_of_ids = @marks_array[1..@marks_array.length-1].map{ |o| o.id }
     end
 
     # draws a 3x3 board on screen
@@ -37,15 +38,28 @@ module TicTacToe
     #   move[:player_mark] is the mark of the player who made the move
     # sends info to the square with a matching ID through Square#change_mark
     def receive_move(move)
-      id = move[:square_id]
-      mark = move[:player_mark]
-      selected_square = @marks_array[id]
-      selected_square.change_mark(mark)
+      square_id = validate_square_id(move[:square_id])
+      player_mark = move[:player_mark]
+      selected_square = @marks_array[square_id]
+      selected_square.change_mark(player_mark)
       selected_square
     end
 
-    def is_game_over?
-      @marks_array[0]
+    def validate_square_id(square_id)
+      # check that the square_id is an integer
+      type_error_message = "Your input of #{square_id} is not even an integer! Enter a whole number."
+      raise TypeError.new(type_error_message) if square_id != square_id.to_i
+      # check that the square_id is within the array
+      index_error_message = "Your input of #{square_id} is out of range. Try something between 1 and #{@list_of_ids.last}, inclusive"
+      raise IndexError.new(index_error_message) if not @list_of_ids.include? square_id
+      # pass it on to the square object
+      square_id
+    end
+
+    def check_game_over(move)
+      return :win if has_someone_won?(move)
+      return :tie if are_all_squares_marked?
+      return false
     end
 
     def has_someone_won?(move = nil)
@@ -56,6 +70,10 @@ module TicTacToe
           @marks_array[square_id].mark == move[:player_mark]
         end
       end
+    end
+
+    def are_all_squares_marked?
+      @marks_array[1..@marks_array.length-1].all? { |sq| not sq.mark.nil? }
     end
 
     private
